@@ -3,35 +3,23 @@
     using System;
 
     /// <summary>
-    /// Example from https://en.wikipedia.org/wiki/Adapter_pattern.
+    /// Example derive from https://en.wikipedia.org/wiki/Adapter_pattern.
     /// </summary>
     public class AdapterDemo
     {
-        public static void RechargeMicroUsbPhone(IMicroUsbPhone phone)
-        {
-            phone.ConnectMicroUsb();
-            phone.Recharge();
-        }
-
-        public static void RechargeLightningPhone(ILightningPhone phone)
-        {
-            phone.ConnectLightning();
-            phone.Recharge();
-        }
-
         public static void Main(string[] args)
         {
             Android android = new Android();
-            Iphone iPhone = new Iphone();
+            Iphone iphone = new Iphone();
 
-            Console.WriteLine("Recharging android with MicroUsb");
-            RechargeMicroUsbPhone(android);
+            // We only have MicroUsb changer.
+            MicroUsbCharger charger = new MicroUsbCharger();
 
-            Console.WriteLine("Recharging iPhone with Lightning");
-            RechargeLightningPhone(iPhone);
-
-            Console.WriteLine("Recharging iPhone with MicroUsb");
-            RechargeMicroUsbPhone(new LightningToMicroUsbAdapter(iPhone));
+            Console.WriteLine("Recharging Android with MicroUsb");
+            charger.RechargeMicroUsbPhone(android);
+            
+            Console.WriteLine("Recharging Iphone with MicroUsb");
+            charger.RechargeMicroUsbPhone(new LightningToMicroUsbAdapter(iphone));
         }
     }
 }

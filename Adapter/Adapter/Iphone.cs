@@ -16,8 +16,8 @@
         {
             if (this.connected)
             {
-                Console.WriteLine("Recharge started");
-                Console.WriteLine("Recharge finished");
+                Console.WriteLine("Recharging started");
+                Console.WriteLine("Recharging finished");
             }
             else
             {
